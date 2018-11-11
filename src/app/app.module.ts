@@ -62,7 +62,7 @@ const routes = [
     MatRadioModule,
     MatDialogModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCNOF4P03xSadwLsndmKVqcHTUl70qoFYU'
+      apiKey: ''
     })
   ],
   providers: [MapService,ApiService, AuthService, {

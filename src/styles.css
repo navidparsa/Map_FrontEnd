@@ -3,12 +3,19 @@
 .fullWidth {
     width: 100%
 } 
+.halfWidth {
+  width: 50%
+}
 .clikLink{
-    cursor: pointer
+color:cornflowerblue;
+    cursor: pointer;
 }
 .example-card {
     max-width: 400px;
   }
   agm-map {
     height: 300px;
+  }
+  table {
+    width: 100%;
   }

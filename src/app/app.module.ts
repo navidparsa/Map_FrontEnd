@@ -13,7 +13,8 @@ import {
   MatToolbarModule,
   MatExpansionModule,
   MatRadioModule,
-  MatDialogModule
+  MatDialogModule,
+  MatTableModule
 } from '@angular/material';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav.component';
@@ -61,8 +62,9 @@ const routes = [
     MatListModule,
     MatRadioModule,
     MatDialogModule,
+    MatTableModule,
     AgmCoreModule.forRoot({
-      apiKey: ''
+      apiKey: 'AIzaSyCNOF4P03xSadwLsndmKVqcHTUl70qoFYU'
     })
   ],
   providers: [MapService,ApiService, AuthService, {

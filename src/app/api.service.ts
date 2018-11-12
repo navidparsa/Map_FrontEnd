@@ -5,10 +5,15 @@ import { HttpClient } from '@angular/common/http';
 export class ApiService {
     constructor(private http: HttpClient) { }
     
-    // postQuestion(question) {
-    //     this.http.post('http://localhost:61436/api/questions', question).subscribe(res => {
-    //         console.log(res);
-    //     });
-    // }
+    postLocation(location) {
+        console.log(location)
+        this.http.post('http://localhost:61436/api/Locations', location).subscribe(res => {
+            console.log(res);
+        });
+    }
+    getLocation() {
+
+        return this.http.get('http://localhost:61436/api/Locations');
+    }
 
 }

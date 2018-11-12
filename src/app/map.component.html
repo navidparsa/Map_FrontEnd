@@ -8,12 +8,15 @@
     <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false"
       (mapClick)="mapClicked($event)">
 
-      <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat"
-        [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable" (dragEnd)="markerDragEnd(m, $event)">
+      <!-- <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat"
+        [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable" (dragEnd)="markerDragEnd(m, $event)"> -->
+        <agm-marker  (markerClick)="clickedMarker(m.label, i)" [latitude]="location.lat"
+        [longitude]="location.lng" [label]="location.label" [markerDraggable]="true" (dragEnd)="markerDragEnd(m, $event)">
 
-        <agm-info-window>
+
+        <!-- <agm-info-window>
           <strong>InfoWindow content</strong>
-        </agm-info-window>
+        </agm-info-window> -->
 
       </agm-marker>
 
@@ -32,21 +35,21 @@
     </p>
     <form class="example-form">
       <mat-form-field>
-        <input matInput placeholder="latitude" value={{lat1}}>
+        <input name="latitude" matInput placeholder="latitude" [(ngModel)]="location.lat">
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput placeholder="longitude" value={{lng1}}>
+        <input  name="longitude" matInput placeholder="longitude" [(ngModel)]="location.lng">
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput placeholder="label" value="">
+        <input  name="label" matInput placeholder="label" [(ngModel)]="location.label">
       </mat-form-field>
     </form>
   </mat-card-content>
 
   <mat-card-actions>
-    <button mat-button>POST</button>
-    <button mat-button>NEW</button>
+    <button mat-button (click)="Post(location)">POST</button>
+    <button mat-button (click)="location={}">NEW</button>
   </mat-card-actions>
 </mat-card>

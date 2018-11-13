@@ -15,5 +15,10 @@ export class ApiService {
 
         return this.http.get('http://localhost:61436/api/Locations');
     }
+    putQuestion(location) {
+        this.http.put(`http://localhost:61436/api/Locations/${location.id}`, location).subscribe(res => {
+            console.log(res);
+        });
+    }
 
 }

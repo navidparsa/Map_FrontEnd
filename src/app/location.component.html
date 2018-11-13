@@ -1,34 +1,25 @@
-<mat-card >
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title></mat-card-title>
-    <mat-card-subtitle></mat-card-subtitle>
-  </mat-card-header>
+<mat-card>
   <mat-card-content>
-    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" (mapClick)="mapClicked($event)">
-
-      <agm-marker *ngFor="let m of markers;"  [latitude]="m.lat"  iconUrl ="/assets/images/beachflag.png"
-        [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable" (dragEnd)="markerDragEnd(m, $event)">
-
-
-        <!-- <agm-info-window>
-          <strong>InfoWindow content</strong>
-        </agm-info-window> -->
-
+    <agm-map [latitude]="location.lat" [longitude]="location.lng" [zoom]="zoom" [disableDefaultUI]="false"
+      [zoomControl]="false" (mapClick)="mapClicked($event)">
+      <div *ngFor="let m of markers;">
+        <agm-marker *ngIf="m.visible" [latitude]="m.lat" iconUrl="/assets/images/beachflag.png" [longitude]="m.lng"
+          [label]="m.label" [markerDraggable]="m.draggable" (dragEnd)="markerDragEnd(m, $event)">
+          <!-- <agm-info-window>
+    <strong>InfoWindow content</strong>
+  </agm-info-window> -->
+        </agm-marker>
+      </div>
+      <agm-marker [latitude]="location.lat" [longitude]="location.lng" [markerDraggable]="true" (dragEnd)="markerDragEnd(m, $event)">
       </agm-marker>
-      <agm-marker  [latitude]="location.lat" 
-        [longitude]="location.lng" [markerDraggable]="true"  (dragEnd)="markerDragEnd(m, $event)">
-      </agm-marker>
-
       <!-- <agm-circle [latitude]="lat + 0.3" [longitude]="lng" 
           [radius]="5000"
           [fillColor]="'red'"
           [circleDraggable]="true"
           [editable]="true">
       </agm-circle> -->
-
     </agm-map>
-    
+
   </mat-card-content>
   <mat-card-content>
     <p>
@@ -40,12 +31,17 @@
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input  name="longitude" matInput placeholder="longitude" [(ngModel)]="location.lng">
+        <input name="longitude" matInput placeholder="longitude" [(ngModel)]="location.lng">
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input  name="label" matInput placeholder="label" [(ngModel)]="location.label">
+        <input name="label" matInput placeholder="label" [(ngModel)]="location.label">
       </mat-form-field>
+      <mat-card-actions>
+        <button mat-button *ngIf="!location.id" (click)="Post(location)">POST</button>
+        <button mat-button *ngIf="location.id" (click)="Put(location)">EDIT</button>
+        <button mat-button (click)="location={}">NEW</button>
+      </mat-card-actions>
     </form>
   </mat-card-content>
   <mat-card-content class="halfWidth">
@@ -53,25 +49,25 @@
 
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
-    
+
       <!-- Position Column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> No. </th>
         <td mat-cell *matCellDef="let element"> {{element.id}} </td>
       </ng-container>
-    
+
       <!-- Name Column -->
       <ng-container matColumnDef="lat">
         <th mat-header-cell *matHeaderCellDef> lat</th>
         <td mat-cell *matCellDef="let element"> {{element.lat}} </td>
       </ng-container>
-    
+
       <!-- Weight Column -->
       <ng-container matColumnDef="lng">
         <th mat-header-cell *matHeaderCellDef> lng </th>
         <td mat-cell *matCellDef="let element"> {{element.lng}} </td>
       </ng-container>
-    
+
       <ng-container matColumnDef="label">
         <th mat-header-cell *matHeaderCellDef> lng </th>
         <td mat-cell *matCellDef="let element"> {{element.label}} </td>
@@ -83,9 +79,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></tr>
     </table>
-    
-    
-  </mat-card-content>
-  </mat-card>
 
-  
+
+  </mat-card-content>
+</mat-card>
